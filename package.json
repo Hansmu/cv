@@ -7,23 +7,29 @@
     "prettier": "prettier --write ."
   },
   "dependencies": {
-    "crypto-js": "^4.1.1",
-    "deep-equal": "^2.2.0",
+    "crypto-js": "4.1.1",
+    "deep-equal": "2.2.0",
     "next": "13.1.5",
-    "normalize.css": "^8.0.1",
+    "normalize.css": "8.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-jss": "^10.9.2"
+    "react-jss": "10.9.2"
   },
   "devDependencies": {
-    "@types/node": "^18.11.18",
+    "@types/node": "18.11.18",
     "@types/react": "18.0.27",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.1.0",
-    "prettier": "^2.8.3",
-    "typescript": "^4.9.4"
+    "@typescript-eslint/eslint-plugin": "5.49.0",
+    "@typescript-eslint/parser": "5.49.0",
+    "eslint": "8.33.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-react": "7.32.2",
+    "husky": "8.0.3",
+    "lint-staged": "13.1.0",
+    "prettier": "2.8.3",
+    "typescript": "4.9.4"
   },
   "lint-staged": {
+    "*.{ts,tsx}": "eslint --fix",
     "**/*": "prettier --write --ignore-unknown"
   }
 }
