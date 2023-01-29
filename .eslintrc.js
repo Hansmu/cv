@@ -4,6 +4,11 @@ module.exports = {
     es2021: true,
     node: true,
   },
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -15,8 +20,10 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ["react", "@typescript-eslint", "import"],
   rules: {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
     "import/no-internal-modules": [
       "error",
       {
