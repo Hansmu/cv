@@ -39,11 +39,11 @@ export class EncryptionService<
     this.decryptedFilePath = `${JSON_DIRECTORY}/${this.decryptedFileName}`;
   }
 
-  getAssignedCVProperty = (): CVProperty => {
-    return this.encryptionFor;
+  setCvInfoPropertyValue = async (cvInfo: Partial<CVInfo>) => {
+    cvInfo[this.encryptionFor] = await this.getDecryptedData();
   };
 
-  getDecryptedData = async (): Promise<CVPropertyValue> => {
+  private getDecryptedData = async (): Promise<CVPropertyValue> => {
     const encryptedFile: EncryptedFileContent | null = this.hasEncryptedFile()
       ? await this.readFileContent<EncryptedFileContent>(this.encryptedFilePath)
       : null;
