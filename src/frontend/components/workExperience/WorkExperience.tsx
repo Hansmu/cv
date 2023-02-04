@@ -7,6 +7,9 @@ import { Title } from "../Title";
 import { WorkExperienceRow } from "./WorkExperienceRow";
 import { WorkExperience as WorkExperienceType } from "../../../shared/types/WorkExperience";
 import React from "react";
+import { WorkExperienceNotes } from "./WorkExperienceNotes";
+import { WorkExperienceProjects } from "./WorkExperienceProjects";
+import { isDisplayingProjects } from "../../config";
 
 type WorkExperienceProps = {
   workExperiences: WorkExperienceType[];
@@ -30,7 +33,7 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({
         Work experience
       </Title>
       <NestedContentContainer>
-        {workExperiences.map((experience) => (
+        {workExperiences.map((experience, index) => (
           <React.Fragment key={experience.companyName}>
             <WorkExperienceRow
               companyName={experience.companyName}
@@ -40,13 +43,15 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({
               role={experience.role}
               technologies={experience.technologies}
             >
-              {experience.notes.map((note) => (
-                <ul key={note}>
-                  <li>{note}</li>
-                </ul>
-              ))}
+              {isDisplayingProjects() ? (
+                <WorkExperienceProjects projects={experience.projects} />
+              ) : (
+                <WorkExperienceNotes notes={experience.notes} />
+              )}
             </WorkExperienceRow>
-            <hr className={classes.divider} />
+            {index !== workExperiences.length - 1 && (
+              <hr className={classes.divider} />
+            )}
           </React.Fragment>
         ))}
       </NestedContentContainer>

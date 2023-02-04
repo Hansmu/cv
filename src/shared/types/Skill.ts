@@ -2,6 +2,8 @@ export enum Skill {
   Javascript = "Javascript",
   Typescript = "Typescript",
   React = "React.js",
+  Angular = "Angular",
+  Riot = "Riot.js",
   Redux = "Redux",
   Node = "Node.js",
   Next = "Next.js",

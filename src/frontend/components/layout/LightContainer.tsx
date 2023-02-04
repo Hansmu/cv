@@ -4,7 +4,7 @@ import { ReactProps } from "../../types/ReactProps";
 
 const useStyles = createUseStyles({
   lightContainer: ({ theme }) => ({
-    background: "white",
+    background: theme.colors.light,
     color: theme.colors.dark,
     padding: "2rem",
   }),

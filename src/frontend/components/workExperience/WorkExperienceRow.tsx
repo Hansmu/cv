@@ -1,8 +1,7 @@
 import { createUseStyles } from "react-jss";
 import { Skill } from "../../../shared/types/Skill";
 import { ReactProps } from "../../types/ReactProps";
-
-const MILLISECONDS_IN_A_MONTH = 2_629_746_000;
+import { TenureLabel } from "./TenureLabel";
 
 type WorkExperienceRow = ReactProps & {
   companyName: string;
@@ -41,45 +40,6 @@ const useStyles = createUseStyles({
   },
 });
 
-const dateFormatter = Intl.DateTimeFormat("en-GB", {
-  month: "short",
-  year: "numeric",
-});
-
-const formatDate = (date: string | null) => {
-  if (!date) {
-    return "TBA";
-  }
-
-  return dateFormatter.format(new Date(date));
-};
-
-const getTenure = (startDate: string, endDate: string | null) => {
-  const parsedEndDate = endDate ? new Date(endDate) : new Date();
-  const durationInMilliseconds =
-    parsedEndDate.getTime() - new Date(startDate).getTime();
-  const durationInMonths = Math.round(
-    durationInMilliseconds / MILLISECONDS_IN_A_MONTH
-  );
-
-  return {
-    years: Math.floor(durationInMonths / 12),
-    months: durationInMonths % 12,
-  };
-};
-
-const buildTimeLabel = (unit: number, label: string) => {
-  if (!unit) {
-    return null;
-  }
-
-  if (unit === 1) {
-    return `${unit} ${label}`;
-  }
-
-  return `${unit} ${label}s`;
-};
-
 export const WorkExperienceRow: React.FC<WorkExperienceRow> = ({
   companyName,
   start,
@@ -90,14 +50,6 @@ export const WorkExperienceRow: React.FC<WorkExperienceRow> = ({
   children,
 }) => {
   const classes = useStyles();
-  const tenure = getTenure(start, end);
-
-  const tenureLabel = [
-    buildTimeLabel(tenure.years, "year"),
-    buildTimeLabel(tenure.months, "month"),
-  ]
-    .filter(Boolean)
-    .join(", ");
 
   return (
     <div className={classes.workExperienceRowContainer}>
@@ -111,13 +63,12 @@ export const WorkExperienceRow: React.FC<WorkExperienceRow> = ({
           <span className={classes.companyNameText}>{companyName}</span>
         </div>
         <div className={classes.text}>
-          {tenureLabel} ({formatDate(start)} - {formatDate(end)})
+          <TenureLabel start={start} end={end} />
         </div>
 
-        <div className={classes.text}>
-          Technologies: {technologies.join(", ")}
-        </div>
         <div className={classes.text}>{role}</div>
+
+        <div className={classes.text}>{technologies.join(" • ")}</div>
 
         <div>{children}</div>
       </div>

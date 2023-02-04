@@ -1,3 +1,4 @@
+import { Project } from "./Project";
 import { Skill } from "./Skill";
 
 export type WorkExperience = {
@@ -8,4 +9,5 @@ export type WorkExperience = {
   role: string;
   notes: string[];
   technologies: Skill[];
+  projects: Project[];
 };
