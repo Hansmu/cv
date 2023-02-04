@@ -52,7 +52,7 @@ export class EncryptionService<
       : null;
 
     if (decryptedFile) {
-      const decryptedFileContentHash = sha256(decryptedFile);
+      const decryptedFileContentHash = sha256(JSON.stringify(decryptedFile));
 
       if (
         !encryptedFile ||
