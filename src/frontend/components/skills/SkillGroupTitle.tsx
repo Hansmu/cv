@@ -1,5 +1,4 @@
-import { createUseStyles, useTheme } from "react-jss";
-import { CustomTheme } from "../../theme/theme";
+import { createUseStyles } from "react-jss";
 import { SkillLevel } from "../../../shared/types/SkillLevel";
 
 const LABEL_MAPPING: Record<SkillLevel, string> = {
@@ -8,35 +7,21 @@ const LABEL_MAPPING: Record<SkillLevel, string> = {
   [SkillLevel.Beginner]: "Beginner",
 };
 
-export const LABEL_FONT_SIZE_MAPPING: Record<SkillLevel, string> = {
-  [SkillLevel.Advanced]: "1.5rem",
-  [SkillLevel.Intermediate]: "1.2rem",
-  [SkillLevel.Beginner]: "1rem",
-};
-
 type SkillGroupTitleProps = {
   title: SkillLevel;
 };
 
-const useStyles = createUseStyles<string, SkillGroupTitleProps>((theme) => ({
+const useStyles = createUseStyles({
   titleContainer: {
     display: "flex",
     alignItems: "center",
     margin: "0.5rem 0",
     fontSize: "1.25rem",
   },
-  starsContainer: {
-    position: "relative",
-    height: "0.0625rem",
-    background: theme.colors.light,
-    flexGrow: 1,
-    margin: "0 0.5rem",
-  },
-}));
+});
 
 export const SkillGroupTitle: React.FC<SkillGroupTitleProps> = ({ title }) => {
-  const theme = useTheme<CustomTheme>();
-  const classes = useStyles({ theme, title });
+  const classes = useStyles();
 
   return (
     <div className={classes.titleContainer}>
